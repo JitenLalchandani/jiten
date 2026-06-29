@@ -1,0 +1,23 @@
+{
+  "name": "web-development",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "backend": "npm install --prefix backend && node backend/server.js",
+    "build": "npm install --prefix backend && vite build",
+    "start": "node backend/server.js",
+    "preview": "vite preview"
+  },
+  "postinstall": "npm install --prefix backend",
+  "dependencies": {
+    "lucide-react": "^0.470.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^10.0.3",
+    "vite": "^5.4.1"
+  }
+}
