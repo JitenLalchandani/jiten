@@ -54,6 +54,18 @@
    heroku open
    ```
 
+### GitHub Actions deployment to Heroku
+This repo includes a workflow at `.github/workflows/heroku-deploy.yml` that deploys on every push to `main`.
+
+To enable it:
+- Create a new Heroku app named `jiten` or another slug.
+- Add GitHub repository secrets:
+  - `HEROKU_API_KEY`
+  - `HEROKU_APP_NAME`
+  - `HEROKU_EMAIL`
+
+Then push to `main` and the workflow will deploy automatically.
+
 ## Notes
 - The backend uses SQLite in `backend/data/skycast.sqlite`.
 - If deploying on a platform that supports only one port, use the backend as the web process.

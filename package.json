@@ -9,6 +9,10 @@
     "start": "node backend/server.js",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0"
+  },
   "postinstall": "npm install --prefix backend",
   "dependencies": {
     "lucide-react": "^0.470.0",
