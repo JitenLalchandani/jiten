@@ -2,8 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY backend/package.json backend/package-lock.json* ./backend/
+COPY package.json ./
+COPY backend/package.json ./backend/
 
 RUN npm install
 RUN npm install --prefix backend
