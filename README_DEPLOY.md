@@ -66,6 +66,26 @@ To enable it:
 
 Then push to `main` and the workflow will deploy automatically.
 
+## Render deployment (no Heroku required)
+Render is a good alternative if you want a straightforward deployment without Heroku.
+
+1. Create a free Render account at `https://render.com`
+2. Create a new Web Service
+3. Connect your GitHub repo: `JitenLalchandani/jiten`
+4. Set the branch to `main`
+5. Use the build command:
+   ```bash
+   npm install && npm install --prefix backend && npm run build
+   ```
+6. Use the start command:
+   ```bash
+   npm start
+   ```
+7. Set environment to `Node`
+8. Create the service
+
+Render will deploy automatically on pushes to `main`.
+
 ## Notes
 - The backend uses SQLite in `backend/data/skycast.sqlite`.
 - If deploying on a platform that supports only one port, use the backend as the web process.
