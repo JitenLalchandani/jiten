@@ -9,3 +9,5 @@ backend/data
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+backend/package-lock.json
