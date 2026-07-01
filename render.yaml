@@ -3,6 +3,6 @@ services:
     name: jiten
     env: node
     plan: free
-    branch: vercel/install-vercel-speed-insights-3w7uy9
+    branch: main
     buildCommand: npm run build
     startCommand: npm start
