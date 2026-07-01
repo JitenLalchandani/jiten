@@ -86,6 +86,28 @@ Render is a good alternative if you want a straightforward deployment without He
 
 Render will deploy automatically on pushes to `main`.
 
+## Vercel deployment
+Vercel is best for hosting this project's Vite frontend. Keep the Express/SQLite backend on Render, Heroku, or another Node server, then point the Vercel frontend to that backend URL.
+
+1. Push this project to GitHub.
+2. Open `https://vercel.com/new` and import the GitHub repository.
+3. Use the default Vite framework settings. This repo includes `vercel.json`, so Vercel will use:
+   ```bash
+   npm install --ignore-scripts
+   npx vite build
+   ```
+4. Add this Environment Variable in Vercel:
+   ```bash
+   VITE_API_BASE_URL=https://your-backend-url.example.com
+   ```
+   Example for Render:
+   ```bash
+   VITE_API_BASE_URL=https://your-render-service.onrender.com
+   ```
+5. Deploy.
+
+If you deploy only the frontend and do not set `VITE_API_BASE_URL`, the app will open but API features such as weather search, saved locations, and AI brief requests will not work in production.
+
 ## Notes
 - The backend uses SQLite in `backend/data/skycast.sqlite`.
 - If deploying on a platform that supports only one port, use the backend as the web process.

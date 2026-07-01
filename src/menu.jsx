@@ -17,6 +17,12 @@ const GLASS = {
   blur:   "blur(22px) saturate(200%)",
 };
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
+function apiUrl(path) {
+  return `${API_BASE_URL}${path}`;
+}
+
 // Atmospheric background gradients — the signature element.
 // Computed from real color science: dawn amber → cerulean day → slate storm → midnight navy.
 const BG = {
@@ -110,7 +116,7 @@ const SEARCH_POOL = [];
 // ─────────────────────────────────────────────────────────────────
 
 async function fetchAiBrief(location, weather) {
-  const res = await fetch('/api/v1/ai/brief', {
+  const res = await fetch(apiUrl('/api/v1/ai/brief'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ location, weather }),
@@ -423,7 +429,7 @@ function LocationsScreen({ locations, activeId, onSelect, onRemove, onAdd }) {
     setSearching(true);
     timerRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/v1/locations/search?q=${encodeURIComponent(q)}&limit=6`);
+        const res = await fetch(apiUrl(`/api/v1/locations/search?q=${encodeURIComponent(q)}&limit=6`));
         if (!res.ok) throw new Error('Search failed');
         const payload = await res.json();
         setResults(payload.results || []);
@@ -649,7 +655,7 @@ export default function SkyCastApp() {
   useEffect(() => {
     async function loadSavedLocations() {
       try {
-        const res = await fetch('/api/v1/locations/saved');
+        const res = await fetch(apiUrl('/api/v1/locations/saved'));
         if (!res.ok) return;
         const data = await res.json();
         if (Array.isArray(data.locations) && data.locations.length > 0) {
@@ -678,7 +684,7 @@ export default function SkyCastApp() {
     async function loadWeather() {
       setLoading(true);
       try {
-        const res = await fetch(`/api/v1/weather/current?lat=${location.lat}&lon=${location.lon}`);
+        const res = await fetch(apiUrl(`/api/v1/weather/current?lat=${location.lat}&lon=${location.lon}`));
         if (!res.ok) throw new Error('Failed to load weather');
         const data = await res.json();
         setWeather(data.current);
@@ -717,7 +723,7 @@ export default function SkyCastApp() {
 
     if (/^\d+$/.test(String(id))) {
       try {
-        await fetch(`/api/v1/locations/saved/${id}`, { method: 'DELETE' });
+        await fetch(apiUrl(`/api/v1/locations/saved/${id}`), { method: 'DELETE' });
       } catch {
         // ignore delete failures for now
       }
@@ -729,7 +735,7 @@ export default function SkyCastApp() {
     if (existing) { handleSelect(existing.id); return; }
 
     try {
-      const res = await fetch('/api/v1/locations/saved', {
+      const res = await fetch(apiUrl('/api/v1/locations/saved'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

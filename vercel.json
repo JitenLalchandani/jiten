@@ -1,0 +1,17 @@
+{
+  "services": {
+    "jiten": {
+      "root": ".",
+      "framework": "vite",
+      "installCommand": "npm install --ignore-scripts",
+      "buildCommand": "npx vite build",
+      "outputDirectory": "dist",
+      "rewrites": [
+        {
+          "source": "/((?!api/).*)",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
+}
